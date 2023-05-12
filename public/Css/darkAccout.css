@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Raleway:wght@100;400&family=Russo+One&display=swap');
+
+:root{
+    --mainColor:#191516 ;
+    --secondaryColor: #262525;
+    /* --dropdownBg: #0C0910; */
+    --dropdownBg: #22181C;
+    --navBarBg: #272932;
+    --cartPageBg: #121420;
+    --checkoutBtnBg: #FFC43D;
+    --overlayBg: rgba(0, 0, 0, 0.316);
+    --smallMenuBg: #F6F7EB;
+}
+
+html, body{
+    padding: 0;
+    margin: 0;
+    color: #fff;
+}
+
+body{
+    transition: 0.5s;
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family: 'Russo One', sans-serif;
+    color: #fff;
+}
+
+p, li, span, input, label, textarea {
+    font-family: 'Raleway', sans-serif;
+    color: #fff;
+}
+
+/* h3 a{
+    text-decoration: none;
+    color: #fff;
+} */
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #8c8a8a;
+}
+
+.section-one{
+    background-color: var(--mainColor);
+}
+
+.section-two{
+    background-color: var(--secondaryColor);
+}
+
+.form-container{
+    width: 480px;
+}
+
+.logo-name{
+    margin-top: 30px;
+}
+
+.nav-bar li{
+    display: inline;
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+.pad{
+    box-shadow: -5px -5px 10px rgba(255, 255, 255, 0.8), 5px 5px 10px rgba(0, 0, 0, 0.25),
+    inset -2px -2px 5px rgba(255, 255, 255, 1),
+    inset 2px 2px 5px rgba(0, 0, 0, 0.3);
+    padding: 70px;
+}
+.reg-pad{
+    box-shadow: -5px -5px 10px rgba(255, 255, 255, 0.8), 5px 5px 10px rgba(0, 0, 0, 0.25),
+    inset -2px -2px 5px rgba(255, 255, 255, 1),
+    inset 2px 2px 5px rgba(0, 0, 0, 0.3);
+    /* padding: 70px; */
+}
+
+.d-flex{
+    margin-right: 200px;
+}
+
+.advert{
+    animation: fly 30s forwards infinite;
+}
+
+@keyframes fly{
+    0%{
+        transform: translateY(20px);
+    }
+    20%{
+        transform: translateY(-20px);
+    }
+    40%{
+        transform: translateY(20px);
+    }
+    60%{
+        transform: translateY(-20px);
+    }
+    80%{
+        transform: translateY(20px);
+    }
+    100%{
+        transform: translateY(-20px);
+    }
+}
+
+.border-error{
+    border: 1px solid red;
+}

@@ -1,0 +1,265 @@
+/* All css */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Raleway:wght@100;400&family=Russo+One&display=swap');
+
+:root{
+    --mainColor:#eaeaea;
+    --secondaryColor: #fff;
+    --best: 6e7271 ; 
+}
+
+.bg-nice{
+    background-color: #e1e0da;
+}
+html, body{
+    padding: 0;
+    margin: 0;
+    scroll-behavior: smooth;
+}
+
+body{
+    transition: 1s;
+    /* background-color: #fff; */
+}
+
+.section-one{
+    background-color: var(--mainColor);
+}
+
+.section-two{
+    background-color: var(--secondaryColor);
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family: 'Russo One', sans-serif;
+}
+
+p, a, li, span, input, label, textarea {
+    font-family: 'Raleway', sans-serif;
+}
+table, th, td, tr, thead{
+    font-family: 'Raleway', sans-serif;
+} 
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #8c8a8a;
+}
+
+.hidden{
+    display: none;
+}
+
+a:hover{
+    color: #000;
+}
+
+li{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+    color: #000;
+}
+
+p a:hover{
+    color: #000;
+}
+
+li a{
+    text-decoration: none;
+    color: #000;
+}
+
+li a:hover{
+    color: #000;
+}
+
+.cursor{
+    cursor: pointer;
+}
+
+.border-error{
+    border: 1px solid red;
+    border-radius: 5px;
+    padding-left: 20px;
+}
+/* sidebar */
+
+#sidebar-overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    width: auto;
+    height: auto;
+    background-color: rgba(0, 0, 0, 0.316);
+}
+
+.sidebar{
+    color: #fff;
+    height: 100vh;
+}
+.sm-sidebar{
+    overflow: hidden;
+    position: fixed;
+    left: 0;
+    height: 100vh;
+    width: 300px;
+    color: #fff;
+    z-index: 10;
+}
+
+.nav-bar{
+    position: fixed;
+    width: 1100px;
+    z-index: 10;
+}
+
+.main-content{
+    margin-top: 80px;
+}
+
+.img{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+.imgs{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+}
+.member-img{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+.member{
+    font-size: 10px;
+}
+/* main-container */
+.main{
+    height: 100vh;
+    overflow: scroll;
+}
+
+.list li{
+    display: inline;
+}
+
+.outline{
+    outline: none;
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.393) ;
+    margin-left: 5px;
+    font-weight: 700;
+    color: purple;
+}
+
+.btn-close{
+    background-color: #fff;
+}
+
+/* search Input */
+.search-input button{
+    border: none;
+    background-color: gray;
+    color: aqua;
+    padding: 3px 6px;
+
+}
+.search-input select{
+    border: none;
+    border-bottom: 1px solid #000;
+    outline: none;
+}
+.search-input input {
+    outline: none;
+}
+
+/* form style */
+/* update page*/
+#updateContainer{
+    height: 500px;
+    overflow: scroll;
+}
+
+.update-shadow{
+    box-shadow: -5px -5px 10px rgba(255, 255, 255, 0.8), 5px 5px 10px rgba(0, 0, 0, 0.25),
+    inset -2px -2px 5px rgba(255, 255, 255, 1),
+    inset 2px 2px 5px rgba(0, 0, 0, 0.3);
+    /* padding: 70px; */
+}
+
+/* gallery style */
+.gallery{
+    width: 100%;
+    height: 400px;
+	object-fit: cover;
+    transform: scale(1);
+    transition: all 0.3s ease-in-out;
+}
+
+.gallery:hover {
+    filter: grayscale(100%);
+    transform: scale(1.1);
+}
+
+.table-height{
+    height: 550px;
+    overflow: scroll;
+}
+
+.table-height2{
+    height: 350px;
+    overflow: scroll;
+}
+
+/* site-setting */
+.site-img-preview{
+    object-fit: contain;
+    height: 250px;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.site-img{
+    object-fit: cover;
+    height: 350px;
+    border-radius: 10px;
+    width: 100%;
+    /* filter: grayscale(25%); */
+}
+
+/* Search result */
+.result{
+    margin-top: 100px;
+}
+
+/* delivery buttons */
+.stat-btn{
+    border: none;
+}
+
+.load{
+    animation: flys 3s forwards infinite;
+    cursor: not-allowed;
+}
+
+
+@keyframes flys {
+    0% {
+        transform: translateX(-50px);
+    }
+    100% {
+        transform: translateX(30px);
+    }
+}
