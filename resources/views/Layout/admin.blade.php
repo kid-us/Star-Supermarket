@@ -21,7 +21,7 @@
         <div class="row">
             {{-- Sidebar on large device --}}
             <div class="col-lg-2 d-none d-lg-block text-light p-1 bg-dark sidebar">
-                <li class="fs-1 mx-4"> <a href="/admin/dashboard" class="logo-link"><span
+                <li class="fs-1 mx-4 my-5"> <a href="/admin/dashboard" class="logo-link"><span
                             class="bi bi-cart-fill text-light"></span>
                         <span class="small text-light">
                             Star
@@ -29,12 +29,12 @@
                     </a>
                 </li>
                 <hr>
-                <span class="ms-3 my-2">
+                <span class="ms-3 my-2 py-5">
                     <span class="bi bi-person-circle fs-5"></span> <span class="ms-2 fs-4">
                         {{ session('admin-user') }}</span>
                 </span>
                 <hr>
-                <div class="ms-4 mt-4">
+                <div class="ms-4 mt-5">
                     <p class="mb-4">
                         <a href="/admin/dashboard" class="text-light"> <span
                                 class="fs-5 bi bi-speedometer2 me-1"></span>
@@ -189,16 +189,42 @@
             </div>
 
             {{-- main content on large device --}}
-            <div class="section-one col-sm-12 col-md-11
-                    col-lg-10 d-sm-none d-md-block main">
+            <div class="section-one col-sm-12 col-md-11 col-lg-10 d-sm-none d-md-block main">
                 {{-- search form --}}
                 <div class="section-two p-2 nav-bar border-bottom small d-none d-sm-block">
                     <div class="row">
-                        <div class="col-1 small">
-                            <span>
-                                <i class="bi bi-list fs-5"></i>
-                                <a href="/admin/dashboard" class="">Home</a>
+                        <div class="col-1 small position-relative mt-2">
+                            <span id="message-btn" class="ms-2">
+                                <i class="bi bi-chat-left-dots-fill fs-5 cursor"></i>
+                                <i class="position-absolute top-0 end-0 translate-middle badge img-rounded bg-danger">
+                                    {{$length}}
+                                </i>
                             </span>
+                        </div>
+
+                        
+
+                        <div id="message-page" class="p-4 hidden">
+                            @if($length < 1)
+                                <p class="p-3 fw-semibold fs-5">There is no message to view!</p>
+                            @else
+                                @foreach ( $message as $msg )
+                                <div class="shadow mb-4 p-5">
+                                    <p>
+                                        <span class="fs-5 fw-semibold text-danger"> Name : </span>  
+                                        <span class="fs-6">{{ $msg->name }} </span>
+                                    </p>
+                                    <p>
+                                    <span class="fs-5 fw-semibold text-danger"> Phone : </span>  
+                                    <span class="fs-6">{{ $msg->phone }}</span>
+                                    </p>
+                                    <p>
+                                        <span class="fs-5 fw-semibold text-danger"> Message : </span>  
+                                        <span class="fs-6">" {{ $msg->message }} "</span>
+                                    </p>
+                                </div>
+                                @endforeach                            
+                            @endif
                         </div>
 
                         <div class="offset-2 col-6 mt-1">
@@ -393,6 +419,7 @@
                     @yield('content')
                 </div>
             </div>
+            
             <div class="section-one col-sm-12 d-none d-sm-block d-md-none">
                 <div>
                     @yield('content')
@@ -425,13 +452,24 @@
             sidebarPage.classList.add("hidden");
             sidebarOverlay.classList.add("hidden");
         })
-
         // xsSidebarBtn.addEventListener("click", () => {
         //     console.log("click");
         //     if (sidebarPage.classList.contains("hidden")) {
         //         sidebarPage.classList.remove("hidden");
         //     }
         // })
+
+        // Message view script
+        const messageBtn = document.getElementById("message-btn");
+        const messagePage = document.getElementById("message-page");
+        messageBtn.addEventListener("click", function () {
+
+            if (messagePage.classList.contains("hidden")) {
+                messagePage.classList.remove("hidden");
+            } else {
+                messagePage.classList.add("hidden");
+            }
+        });
     </script>
     <script src=" {{ asset('Bootstrap/js/bootstrap.js') }}"></script>
 </body>
