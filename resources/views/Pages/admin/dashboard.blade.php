@@ -259,10 +259,6 @@
                                 <p> Price: {{ $latest->price }}</p>
                             </div>
                         </div>
-                    @else
-                        @once
-                            <h3 class="text-danger">No products upload in this Week</h3>
-                        @endonce
                     @endif
                 @endforeach
                 <a href="/admin/table" class="small text-end text-primary">See all</a>
