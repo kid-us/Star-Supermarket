@@ -9,6 +9,8 @@ use App\Models\Customer;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use App\Models\User;
+use App\Models\Comment; 
+
 use Hash;
 use Stripe;
 use Vonage;
@@ -32,7 +34,7 @@ class UserController extends Controller
     public function fv(){
         $count =  count(DB::select('select * from stores where category = "FruitsVegetables"'));
         $pageItem = ceil($count/2);
-        $fv = DB::table('stores')->where('category', '=', 'FruitsVegetables')->paginate(12);
+        $fv = DB::table('stores')->where('category', '=', 'FruitsVegetables')->orderBy('id', 'DESC')->paginate(12);
         $site = DB::table('sites')->get();
 
         return view('Pages.fv', [
@@ -41,10 +43,11 @@ class UserController extends Controller
             'site' => $site
         ]);
     }
+
     public function beverage(){
         $count =  count(DB::select('select * from stores where category = "Beverage"'));
         $pageItem = ceil($count/2);
-        $beverage =  DB::table('stores')->where('category', '=', 'Beverage')->paginate(12);
+        $beverage =  DB::table('stores')->where('category', '=', 'Beverage')->orderBy('id', 'DESC')->paginate(12);
         $site = DB::table('sites')->get();
 
         return view('Pages.beverage',[
@@ -53,10 +56,11 @@ class UserController extends Controller
             'site' => $site
         ]);   
     }
+
     public function dairy(){
         $count =  count(DB::select('select * from stores where category = "DairyEgg"'));
         $pageItem = ceil($count/2);
-        $dairy = DB::table('stores')->where('category', '=', 'DairyEgg')->paginate(12);
+        $dairy = DB::table('stores')->where('category', '=', 'DairyEgg')->orderBy('id', 'DESC')->paginate(12);
         $site = DB::table('sites')->get();
 
         return view('Pages.dairy',[
@@ -65,10 +69,11 @@ class UserController extends Controller
             'site' => $site
         ]);
     }
+
     public function electronics(){
         $count =  count(DB::select('select * from stores where category = "Electronics"'));
         $pageItem = ceil($count/2);
-        $electronics =  DB::table('stores')->where('category', '=', 'Electronics')->paginate(12);
+        $electronics =  DB::table('stores')->where('category', '=', 'Electronics')->orderBy('id', 'DESC')->paginate(12);
         $site = DB::table('sites')->get();
 
         return view('Pages.electronics', [
@@ -77,10 +82,11 @@ class UserController extends Controller
             'site' => $site
         ]);
     }
+
     public function furniture(){
         $count =  count(DB::select('select * from stores where category = "Furnitures"'));
         $pageItem = ceil($count/2);
-        $furniture =  DB::table('stores')->where('category', '=', 'Furnitures')->paginate(12);
+        $furniture =  DB::table('stores')->where('category', '=', 'Furnitures')->orderBy('id', 'DESC')->paginate(12);
         $site = DB::table('sites')->get();
 
         return view('Pages.furniture',[
@@ -89,10 +95,11 @@ class UserController extends Controller
             'site' => $site
         ]);
     }
+
     public function foods(){
         $count =  count(DB::select('select * from stores where category = "Foods"'));
         $pageItem = ceil($count/2);
-        $food =  DB::table('stores')->where('category', '=', 'Foods')->paginate(12);
+        $food =  DB::table('stores')->where('category', '=', 'Foods')->orderBy('id', 'DESC')->paginate(12);
         $site = DB::table('sites')->get();
 
         return view('Pages.foods',[
@@ -101,10 +108,11 @@ class UserController extends Controller
             'site' => $site
         ]);
     }
+
     public function mf(){
         $count =  count(DB::select('select * from stores where category = "MeatFish"'));
         $pageItem = ceil($count/2);
-        $meat =  DB::table('stores')->where('category', '=', 'MeatFish')->paginate(12);
+        $meat =  DB::table('stores')->where('category', '=', 'MeatFish')->orderBy('id', 'DESC')->paginate(12);
         $site = DB::table('sites')->get();
 
         return view('Pages.mf',[
@@ -113,10 +121,11 @@ class UserController extends Controller
             'site' => $site
         ]);
     }
+
     public function house(){
         $count =  count(DB::select('select * from stores where category = "HouseCleaners"'));
         $pageItem = ceil($count/2);
-        $house =  DB::table('stores')->where('category', '=', 'HouseCleaners')->paginate(12);
+        $house =  DB::table('stores')->where('category', '=', 'HouseCleaners')->orderBy('id', 'DESC')->paginate(12);
         $site = DB::table('sites')->get();
 
         return view('Pages.house',[
@@ -125,10 +134,11 @@ class UserController extends Controller
             'site' => $site
         ]);
     }
+
     public function health(){
         $count =  count(DB::select('select * from stores where category = "HealthBeauty"'));
         $pageItem = ceil($count/2);
-        $health =  DB::table('stores')->where('category', '=', 'HealthBeauty')->paginate(12);
+        $health =  DB::table('stores')->where('category', '=', 'HealthBeauty')->orderBy('id', 'DESC')->paginate(12);
         $site = DB::table('sites')->get();
 
         return view('Pages.health',[
@@ -138,7 +148,36 @@ class UserController extends Controller
         ]);
     }
 
-    // Purchase and Payment Controller
+    public function contact(){
+        return view("Pages.contact");
+    }
+
+    public function contactUS(Request $request){
+        $this->validate($request, [
+            'name' => 'required|min:3',
+            'email' => 'required|min:14',
+            'phone' => 'required',
+            'subject' => 'required|min:10',
+            'message' => 'required|min:20|max:200'
+        ]);
+
+        $comment = new Comment();
+
+            $comment->name = request('name');
+            $comment->phone =  md5(request('phone'));
+            $comment->email = request('email');
+            $comment->subject = request('subject');
+            $comment->message = request('message');
+            $comment->save();
+
+            return back()->with('feedback' , "We received your feedback thank you! ");
+
+    }
+
+    public function getPayment(){
+            return view('Pages.payment');
+    }
+
     public function purchase(Request $request){
         if($request['type'] == ''){
             $product = $request['product'];
@@ -193,6 +232,7 @@ class UserController extends Controller
                 ]);
         }
     }
+
     public function payment(Request $request){
 
         $stat = $request['buying'];
@@ -211,8 +251,8 @@ class UserController extends Controller
             return view("Pages.payment");
         }
     }
-    public function pay(Request $request){
 
+    public function pay(Request $request){
         $this->validate($request, [
             'buyerName' => 'required|min:3',
             'buyerEmail' => 'required|min:14',
@@ -221,7 +261,8 @@ class UserController extends Controller
             'address' => 'required',
             'city' => 'required'
         ]);
-
+        
+        
         $invoice = strtoupper (Str::random(1).rand(1,50000));
         
         // Multiple Product Buying
@@ -230,7 +271,7 @@ class UserController extends Controller
             $row = count($request->proNo);  
             $store =  DB::table('stores')->get();
             $size = count($store);
-           
+            
             $total = intval(100 * $request->totalPrice);
             Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
             $multipleStripe = Stripe\Charge::create([
@@ -242,17 +283,17 @@ class UserController extends Controller
             ]);
     
             if($multipleStripe){
-                // $basic  = new \Vonage\Client\Credentials\Basic("9ca7210f", "Dl9eqgOqBj4Ix7GR");
-                // $client = new \Vonage\Client($basic);
+                $basic  = new \Vonage\Client\Credentials\Basic("644a7ba3", "6k2EK8E9LNAHd970");
+                $client = new \Vonage\Client($basic);
                 
-                // $from = "Vonage APIs";
-                // $response = $client->sms()->send(
-                //     new \Vonage\SMS\Message\SMS("251936231225", $from, 'Thank you for choosing us Star Supermarket')
-                // );
+                $from = "Vonage APIs";
+                $response = $client->sms()->send(
+                    new \Vonage\SMS\Message\SMS("251922666350", $from, 'Thank you for choosing us Star Supermarket')
+                );
                 
-                // $message = $response->current();
+                $message = $response->current();
                 
-                // if ($message->getStatus() == 0) {
+                if ($message->getStatus() == 0) {
                     for ($i = 0; $i < $row; $i++)
                     {
                         $dataSave =[
@@ -285,11 +326,10 @@ class UserController extends Controller
                     }
                     Session::put("success", $invoice);
                     return redirect('/star');
-                // } else {
-                //     dd("The message failed with status: " . $message->getStatus() );
-                // }
+                } else {
+                    dd("The message failed with status: " . $message->getStatus() );
+                }
             }
-            // setcookie("message", "yess"); //to remove cookie after sending message
         // Single Product Buying
         }else{
             $total = intval(100 * $request->totalPrice);
@@ -303,17 +343,17 @@ class UserController extends Controller
             ]);
 
             if($stripe){
-                // $basic  = new \Vonage\Client\Credentials\Basic("9ca7210f", "Dl9eqgOqBj4Ix7GR");
-                // $client = new \Vonage\Client($basic);
+                $basic  = new \Vonage\Client\Credentials\Basic("644a7ba3", "6k2EK8E9LNAHd970");
+                $client = new \Vonage\Client($basic);
                 
-                // $from = "Vonage APIs";
-                // $response = $client->sms()->send(
-                //     new \Vonage\SMS\Message\SMS("251936231225", $from, 'Thank you for choosing us Star Supermarket')
-                // );
+                $from = "Vonage APIs";
+                $response = $client->sms()->send(
+                    new \Vonage\SMS\Message\SMS("251922666350", $from, 'Thank you for choosing us Star Supermarket')
+                );
                 
-                // $message = $response->current();
+                $message = $response->current();
                 
-                // if ($message->getStatus() == 0) {
+                if ($message->getStatus() == 0) {
                     $store =  DB::table('stores')->get();
                     $size = count($store);
     
@@ -347,10 +387,9 @@ class UserController extends Controller
                     Session::put("success", $invoice);
                     return redirect('/star');
     
-                // } else {
-                //     dd("The message failed with status: " . $message->getStatus());
-                // //     echo "The message failed with status: " . $message->getStatus() . "\n";
-                // }
+                } else {
+                    dd("The message failed with status: " . $message->getStatus());
+                }
             }
     
         }
