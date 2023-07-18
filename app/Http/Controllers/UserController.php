@@ -283,12 +283,12 @@ class UserController extends Controller
             ]);
     
             if($multipleStripe){
-                $basic  = new \Vonage\Client\Credentials\Basic("644a7ba3", "6k2EK8E9LNAHd970");
+                $basic  = new \Vonage\Client\Credentials\Basic("9ca7210f", "Dl9eqgOqBj4Ix7GR");
                 $client = new \Vonage\Client($basic);
                 
                 $from = "Vonage APIs";
                 $response = $client->sms()->send(
-                    new \Vonage\SMS\Message\SMS("251922666350", $from, 'Thank you for choosing us Star Supermarket')
+                    new \Vonage\SMS\Message\SMS("251936231225", $from, 'Thank you for choosing us Star Supermarket')
                 );
                 
                 $message = $response->current();
@@ -343,12 +343,12 @@ class UserController extends Controller
             ]);
 
             if($stripe){
-                $basic  = new \Vonage\Client\Credentials\Basic("644a7ba3", "6k2EK8E9LNAHd970");
+                $basic  = new \Vonage\Client\Credentials\Basic("9ca7210f", "Dl9eqgOqBj4Ix7GR");
                 $client = new \Vonage\Client($basic);
                 
                 $from = "Vonage APIs";
                 $response = $client->sms()->send(
-                    new \Vonage\SMS\Message\SMS("251922666350", $from, 'Thank you for choosing us Star Supermarket')
+                    new \Vonage\SMS\Message\SMS("251936231225", $from, 'Thank you for choosing us Star Supermarket')
                 );
                 
                 $message = $response->current();
