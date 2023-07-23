@@ -335,7 +335,8 @@ li a:hover{
 
 /* items on sale */
 .product-img{
-    /* height: 170px; */
+/*     comment */
+	height: 170px;
     width: 75%;
     aspect-ratio: 4/3;
     object-fit: contain;
